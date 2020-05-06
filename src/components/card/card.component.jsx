@@ -1,24 +1,20 @@
 import React from 'react';
-
-// function Card(props) {
-//     return (
-//     <div>
-//         <h1> { props.monster.name } </h1>
-//     </div>
-//     );
-// }
-
-// export default Card;
+import './card.styles.css';
 
 function Card(props) {
-    return <div className="card-list">
-      {props.monsters.map(monster => (
-        <Card key={monster.id} monster={monster} />
-      ))}
-      </div>
-  
-    
-  };
-  
+    return (
+    <div className="card-container">
+        <img 
+        alt="monster"
+        src={ `https://robohash.org/${props.monster.id}?set=set1` }
+        />
+        <h1> { props.monster.name } </h1>
+        <p>{props.monster.email}</p>
+    </div>
+    );
+}
+
 export default Card;
+
+
   

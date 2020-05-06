@@ -6,20 +6,8 @@ import CardList from "./components/card-list/card-list.component.jsx";
 
 class App extends React.Component {
   state = {
-    monsters: [
-      {
-        name: "Frankenstein",
-        id: "fdasfd",
-      },
-      {
-        name: "Dracula",
-        id: "fdsaggf",
-      },
-      {
-        name: "Zombie",
-        id: "jhiojo",
-      },
-    ],
+    monsters: [],
+    SearchField: "",
   };
 
   componentDidMount() {
@@ -28,11 +16,20 @@ class App extends React.Component {
       .then((users) => this.setState({ monsters: users }));
   }
   render() {
+
+    const { monsters, SearchField} = this.state;
+    const filteredMonsters = monsters.filter( monster =>
+      monster.name.toLowerCase().includes(SearchField.toLowerCase())
+      ) 
     return (
       <div className="App">
-        <CardList monsters={this.state.monsters}>
-       
-          
+        <input 
+        type="search"
+        placeholder="Search" 
+        onChange={e => {
+          this.setState({ SearchField: e.target.value });
+        }}/>
+        <CardList monsters={filteredMonsters}>
         </CardList>
       </div>
     );
