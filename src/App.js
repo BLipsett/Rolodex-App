@@ -2,7 +2,7 @@ import React from "react";
 //import logo from "./logo.svg";
 import './App.css'
 import CardList from "./components/card-list/card-list.component.jsx";
-
+import SearchBox from './components/search-box/search-box-component.jsx';
 
 class App extends React.Component {
   state = {
@@ -15,6 +15,10 @@ class App extends React.Component {
       .then((response) => response.json())
       .then((users) => this.setState({ monsters: users }));
   }
+
+  handleChange = (e) => {
+    this.setState({ SearchField: this.e.target.value })
+  }
   render() {
 
     const { monsters, SearchField} = this.state;
@@ -23,12 +27,10 @@ class App extends React.Component {
       ) 
     return (
       <div className="App">
-        <input 
-        type="search"
-        placeholder="Search" 
-        onChange={e => {
-          this.setState({ SearchField: e.target.value });
-        }}/>
+        <h1>Rolodex App</h1>
+        <SearchBox 
+        placeholder="search monsters"
+        handleChange={this.handleChange}/>
         <CardList monsters={filteredMonsters}>
         </CardList>
       </div>
